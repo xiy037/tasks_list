@@ -74,3 +74,31 @@ body {
 .list:nth-child(even) {
   background-color: #ccf2ff;
 }
+
+/* alert window */
+.bg-filter {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #e6e6e6;
+  opacity: 0.7;
+}
+.alert {
+  display: none;
+  position: absolute;
+  padding: 50px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 150px;
+  text-align: center;
+  background-color: white;
+}
+.alert-question {
+  height: 70%;
+}
+

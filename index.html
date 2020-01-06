@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Task Lists</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  </head>
-  <body>
-    <nav class="nav-container">
-      <div class="nav-box all-box">
-        All
-        <p class="counter" id="all-counter">
-          number
-        </p>
-      </div>
-      <div class="nav-box todo-box">
-        ToDo
-        <p class="counter" id="todo-counter">
-          number
-        </p>
-      </div>
-      <div class="nav-box active-box">
-        Active
-        <p class="counter" id="active-counter">
-          number
-        </p>
-      </div>
-      <div class="nav-box complete-box">
-        Completed
-        <p class="counter" id="complete-counter">
-          number
-        </p>
-      </div>
-    </nav>
-    <main class="list-container" id="list-container">
-      
-    </main>
-    <script type="text/javascript" src="index.js"></script>
-  </body>
+
+<head>
+  <title>Task Lists</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <nav class="nav-container">
+    <div class="nav-box all-box">
+      All
+      <p class="counter" id="all-counter">
+        number
+      </p>
+    </div>
+    <div class="nav-box todo-box">
+      ToDo
+      <p class="counter" id="todo-counter">
+        number
+      </p>
+    </div>
+    <div class="nav-box active-box">
+      Active
+      <p class="counter" id="active-counter">
+        number
+      </p>
+    </div>
+    <div class="nav-box complete-box">
+      Completed
+      <p class="counter" id="complete-counter">
+        number
+      </p>
+    </div>
+  </nav>
+  <main class="list-container" id="list-container">
+
+  </main>
+  <div class="bg-filter" id="filter">
+  </div>
+  <div class="alert" id="alert">
+    <p class="alert-question">提示：确定删除该条目吗？</p>
+    <input type="button" class="button" value="确定" onclick>
+    <input type="button" class="button" value="取消">
+  </div>
+
+  <script type="text/javascript" src="index.js"></script>
+</body>
+
 </html>

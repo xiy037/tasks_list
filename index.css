@@ -8,6 +8,21 @@ body {
   margin: auto;
   width: 1000px;
 }
+.header-container {
+  padding: 20px;
+  max-width: 100%;
+  text-align: center;
+  background-color: #ccf2ff;
+}
+.search-input {
+  width: 400px;
+  height: 30px;
+}
+.search-input::placeholder {
+  color: #cccccc;
+  font-style: italic;
+}
+/* navigator */
 .nav-container {
   padding: 20px 0;
   display: flex;
@@ -78,7 +93,7 @@ body {
 /* alert window */
 .bg-filter {
   display: none;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
@@ -88,7 +103,7 @@ body {
 }
 .alert {
   display: none;
-  position: absolute;
+  position: fixed;
   padding: 50px;
   left: 50%;
   top: 50%;

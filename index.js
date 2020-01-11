@@ -1,21 +1,27 @@
+let data = [];
 loadAll();
 
 function loadAll() {
-  let main = document.getElementById("list-container");
-  let str = ``;
   axios.get("http://localhost:3007/lists").then((response) => {
-    let data = response.data;
-    for (let i = 0; i < data.length; i++) {
-      str += `<div class="list" id=${data[i].id}  onclick="showAlert()">
-      <div class="task-number">项目${data[i].taskNumber}</div>
-      <div class="task-content">${data[i].content}</div>
-      <div class="status">${data[i].status}</div>
-      <div class="buttons-box"><input type="button" value="delete" class="button"></input></div>
-      </div>`;
-    }
-    main.innerHTML += str;
+    data = response.data;
+    listTasks(data);
     countNumber(data);
   }).catch((error) => console.log(error));
+}
+
+function listTasks(array) {
+  let main = document.getElementById("list-container");
+  main.innerHTML = "";
+  let str = ``;
+  for (let i = 0; i < array.length; i++) {
+    str += `<div class="list" id=${array[i].id}  onclick="showAlert()">
+    <div class="task-number">项目${array[i].taskNumber}</div>
+    <div class="task-content">${array[i].content}</div>
+    <div class="status">${array[i].status}</div>
+    <div class="buttons-box"><input type="button" value="delete" class="button"></input></div>
+    </div>`;
+  }
+  main.innerHTML += str;
 }
 
 function showAlert() {
@@ -28,6 +34,8 @@ function showAlert() {
     alert.onclick = () => {
       if (event.target.value === "确定") {
         deletelistItem(id);
+        alert.style.display = "none";
+        bg.style.display = "none";
       } else if (event.target.value === "取消") {
         alert.style.display = "none";
         bg.style.display = "none";
@@ -40,6 +48,14 @@ function deletelistItem(id) {
     axios.delete(`http://localhost:3007/lists/${id}`).then((response) => {
       console.log(response.status, response.data);
     })
+    let newData = [];
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id != id) {
+        newData.push(data[i]);
+      }
+    }
+    data = newData;
+    countNumber(data);
 }
 
 function countNumber(array) {
@@ -65,4 +81,24 @@ function countNumber(array) {
   todo.innerHTML = todoCount;
   active.innerHTML = activeCount;
   complete.innerHTML = completeCount;
+}
+
+function searchTask() {
+  let searchResult = [];
+  for (let i = 0; i < data.length; i++) {
+    if (isInTaskObj(data[i])) {
+      searchResult.push(data[i]);
+    }
+  }
+  listTasks(searchResult);
+}
+
+function isInTaskObj(obj) {
+  let input = document.getElementById("input");
+  for (x in obj) {
+    if (obj[x].toString().includes(input.value)) {
+      return true;
+    }
+  }
+  return false;
 }

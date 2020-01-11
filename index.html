@@ -11,7 +11,12 @@
 <body>
   <header class="header-container">
     <input type="text" class="search-input" placeholder="请输入搜索词" id="input">
-    <input type="button" class="button" value="Search" onclick="searchHTML()">
+    <input type="button" class="button search-button" value="Search" onclick="searchHTML()">
+    <div class="arrow-box" id="search-arrow">
+      <p class="iconfont icon-arrow-up search-icon" id="down"></p>
+      <p class="iconfont icon-arrow-up down-search-icon search-icon" id="up"></p>
+      <p class="iconfont icon-guanbi search-icon" onclick="clearInput()"></p>
+    </div>
   </header>
   <nav class="nav-container">
     <div class="nav-box all-box">

@@ -9,9 +9,11 @@ body {
   width: 1000px;
 }
 .header-container {
+  display: flex;
   padding: 20px;
   max-width: 100%;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
   background-color: #ccf2ff;
 }
 .search-input {
@@ -21,6 +23,23 @@ body {
 .search-input::placeholder {
   color: #cccccc;
   font-style: italic;
+}
+.arrow-box {
+  position: fixed;
+  top: 0;
+  right: 100px;
+  display: none;
+  background-color: wheat;
+}
+.search-button {
+  height: 30px;
+}
+.search-icon {
+  height: 15px;
+  padding: 3px;
+}
+.down-search-icon {
+  transform: rotate(180deg);
 }
 /* navigator */
 .nav-container {
@@ -101,6 +120,9 @@ body {
 }
 .highlight {
   background-color: yellow;
+}
+.highlight2 {
+  background-color: coral;
 }
 
 /* alert window */

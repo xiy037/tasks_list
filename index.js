@@ -110,20 +110,50 @@ function searchTask() {
 
 function searchHTML() {
   let input = document.getElementById("input").value;
+  let regInput = new RegExp(input, "ig");
   let myNodeList = document.querySelectorAll("div");
+  let resultNodes = [];
   for (let i = 0; i < myNodeList.length; i++) {
     let divNode = myNodeList[i]
     if (divNode.children.length === 0) {
-      let regInput = new RegExp(input, "ig");
       if (divNode.innerHTML.match(regInput)) {
         divNode.innerHTML = highlightValue(divNode.innerHTML, input);
-        divNode.scrollIntoView();
+        resultNodes.push(divNode);
       }
     }
   }
-  document.getElementById("input").value = "";
+  let tempNodeList = [];
+  document.getElementById("down").onclick = () => {
+   scrollDown(tempNodeList, resultNodes);
+  }
+  document.getElementById("up").onclick = () => {
+    scrollUp(tempNodeList, resultNodes);
+  }
+  document.getElementById("search-arrow").style.display = "flex";
 }
 
+function scrollDown(tempNodeList, resultNodes) {
+  let input = document.getElementById("input").value;
+  let node = resultNodes.shift();
+  node.innerHTML = highlightValue2(node.innerHTML, input);
+  tempNodeList.push(node);
+  node.scrollIntoView();
+}
+
+function scrollUp(tempNodeList, resultNodes) {
+  let input = document.getElementById("input").value;
+  let node = tempNodeList.pop();
+  node.innerHTML = highlightValue(node.innerHTML, input);
+  resultNodes.unshift(node);
+  node.scrollIntoView();
+}
+
+function clearInput() {
+  document.getElementById("input").value = "";
+  listTasks(data);
+  document.getElementById("search-arrow").style.display = "none";
+  document.documentElement.scrollTop = 0;
+}
 
 function isInTaskObj(obj) {
   let input = document.getElementById("input").value;
@@ -141,6 +171,13 @@ function highlightValue(item, subStr) {
   let newStr = `<span class="highlight">${item.match(regSubStr)[0]}</span>`;
   return item.replace(regSubStr, newStr);
 }
+
+function highlightValue2(item, subStr) {
+  let regSubStr = new RegExp(subStr, "ig");
+  let newStr = `<span class="highlight2">${item.match(regSubStr)[0]}</span>`;
+  return item.replace(regSubStr, newStr);
+}
+
 
 function sortAscendingDate() {
   if (mode === "all") {

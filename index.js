@@ -109,8 +109,9 @@ function searchTask() {
 
 function isInTaskObj(obj) {
   let input = document.getElementById("input").value;
+  let regInput = new RegExp(input, "ig"); //case insensitive
   for (let x in obj) {
-    if (obj[x].toString().includes(input)) {
+    if (obj[x].toString().match(regInput)) {
       return true;
     }
   }
@@ -118,8 +119,9 @@ function isInTaskObj(obj) {
 }
 
 function highlightValue(item, subStr) {
-  let newStr = `<span class="highlight">${subStr}</span>`;
-  return item.replace(subStr, newStr);
+  let regSubStr = new RegExp(subStr, "ig");
+  let newStr = `<span class="highlight">${item.match(regSubStr)}</span>`;
+  return item.replace(regSubStr, newStr);
 }
 
 function sortAscendingDate() {

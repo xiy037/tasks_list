@@ -59,9 +59,16 @@ body {
   display: flex;
   padding: 10px 0;
 }
+.list-head {
+  background-color: #cccccc;
+}
+.sort-icon {
+  cursor: pointer;
+}
 .task-number,
 .task-content,
 .status,
+.endTime,
 .buttons-box {
   height: 35px;
   line-height: 35px;
@@ -71,10 +78,13 @@ body {
   width: 15%;
 }
 .task-content {
-  width: 60%;
+  width: 45%;
 }
 .status{
   width: 10%;
+}
+.endTime {
+  width: 15%;
 }
 .buttons-box {
   width: 15%;
@@ -88,6 +98,9 @@ body {
 }
 .list:nth-child(even) {
   background-color: #ccf2ff;
+}
+.highlight {
+  background-color: yellow;
 }
 
 /* alert window */

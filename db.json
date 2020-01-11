@@ -4,61 +4,71 @@
       "id": 1,
       "taskNumber": "A",
       "status": "complete",
-      "content": "taskA content: today is a good day."
+      "content": "taskA content: today is a good day.",
+      "endTime": "2018-12-01"
     },
     {
       "id": 2,
       "taskNumber": "B",
       "status": "complete",
-      "content": "taskB content: tomorrow is another day."
+      "content": "taskB content: tomorrow is another day.",
+      "endTime": "2018-10-01"
     },
     {
       "id": 3,
       "taskNumber": "C",
       "status": "active",
-      "content": "taskC content: finish Math part."
+      "content": "taskC content: finish Math part.",
+      "endTime": "2019-01-01"
     },
     {
       "id": 4,
       "taskNumber": "D",
       "status": "active",
-      "content": "taskD content: finish Chinese part."
+      "content": "taskD content: finish Chinese part.",
+      "endTime": "2018-10-01"
     },
     {
       "id": 5,
       "taskNumber": "E",
       "status": "active",
-      "content": "taskE content: finish English part."
+      "content": "taskE content: finish English part.",
+      "endTime": "2019-12-01"
     },
     {
       "id": 6,
       "taskNumber": "F",
       "status": "active",
-      "content": "taskF content: work on Math homework."
+      "content": "taskF content: work on Math homework.",
+      "endTime": "2019-05-01"
     },
     {
       "id": 7,
       "taskNumber": "G",
       "status": "active",
-      "content": "taskG content: work on English homework."
+      "content": "taskG content: work on English homework.",
+      "endTime": "2019-07-01"
     },
     {
       "id": 8,
       "taskNumber": "H",
       "status": "to-do",
-      "content": "taskH content: go to school."
+      "content": "taskH content: go to school.",
+      "endTime": "2019-07-15"
     },
     {
       "id": 9,
       "taskNumber": "I",
       "status": "to-do",
-      "content": "taskI content: finish test."
+      "content": "taskI content: finish test.",
+      "endTime": "2018-08-01"
     },
     {
       "id": 10,
       "taskNumber": "J",
       "status": "to-do",
-      "content": "taskJ content: review homework."
+      "content": "taskJ content: review homework.",
+      "endTime": "2018-11-11"
     }
   ]
 }

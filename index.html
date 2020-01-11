@@ -4,6 +4,7 @@
 <head>
   <title>Task Lists</title>
   <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" href="iconfont/iconfont.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
@@ -38,6 +39,17 @@
       </p>
     </div>
   </nav>
+  <div class="list list-head">
+    <div class="task-number">项目编号</div>
+    <div class="task-content">项目内容</div>
+    <div class="status">项目状态</div>
+    <div class="endTime">
+      截止日期
+      <span class="iconfont icon-shengxu sort-icon" onclick="sortAscendingDate()"></span>
+      <span class="iconfont icon-jiangxu1 sort-icon" onclick="sortDescendingDate()"></span>
+    </div>
+    <div class="buttons-box">操作</div>
+  </div>
   <main class="list-container" id="list-container">
 
   </main>

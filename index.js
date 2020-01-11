@@ -47,18 +47,18 @@ function showAlert() {
   }
 }
 function deletelistItem(id) {
-    document.getElementById(id).remove();
-    axios.delete(`http://localhost:3007/lists/${id}`).then((response) => {
-      console.log(response.status, response.data);
-    })
-    let newData = [];
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].id != id) {
-        newData.push(data[i]);
-      }
+  document.getElementById(id).remove();
+  axios.delete(`http://localhost:3007/lists/${id}`).then((response) => {
+    console.log(response.status, response.data);
+  })
+  let newData = [];
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id != id) {
+      newData.push(data[i]);
     }
-    data = newData;
-    countNumber(data);
+  }
+  data = newData;
+  countNumber(data);
 }
 
 function countNumber(array) {
@@ -70,7 +70,7 @@ function countNumber(array) {
   let todoCount = 0;
   let activeCount = 0;
   let completeCount = 0;
-  for (let i = 0 ; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     if (array[i].status === "complete") {
       completeCount++;
     } else if (array[i].status === "active") {
@@ -94,11 +94,12 @@ function searchTask() {
       searchResult.push(newItem);
     }
   }
-  let input = document.getElementById("input").value;
-  for(let i = 0; i < searchResult.length; i++) {
+  for (let i = 0; i < searchResult.length; i++) {
     for (let x in searchResult[i]) {
-      if (x !== "id") {
-        searchResult[i][x] = highlightValue(searchResult[i][x], input); 
+      let input = document.getElementById("input").value;
+      let regInput = new RegExp(input, "ig");
+      if (x !== "id" && searchResult[i][x].match(regInput)) {
+        searchResult[i][x] = highlightValue(searchResult[i][x], input);
       }
     }
   }
@@ -106,6 +107,23 @@ function searchTask() {
   mode = "search";
   document.getElementById("input").value = "";
 }
+
+function searchHTML() {
+  let input = document.getElementById("input").value;
+  let myNodeList = document.querySelectorAll("div");
+  for (let i = 0; i < myNodeList.length; i++) {
+    let divNode = myNodeList[i]
+    if (divNode.children.length === 0) {
+      let regInput = new RegExp(input, "ig");
+      if (divNode.innerHTML.match(regInput)) {
+        divNode.innerHTML = highlightValue(divNode.innerHTML, input);
+        divNode.scrollIntoView();
+      }
+    }
+  }
+  document.getElementById("input").value = "";
+}
+
 
 function isInTaskObj(obj) {
   let input = document.getElementById("input").value;
@@ -120,7 +138,7 @@ function isInTaskObj(obj) {
 
 function highlightValue(item, subStr) {
   let regSubStr = new RegExp(subStr, "ig");
-  let newStr = `<span class="highlight">${item.match(regSubStr)}</span>`;
+  let newStr = `<span class="highlight">${item.match(regSubStr)[0]}</span>`;
   return item.replace(regSubStr, newStr);
 }
 
@@ -138,13 +156,13 @@ function sortDescendingDate() {
   let descendArr = []
   if (mode === "all") {
     sortDate(data);
-    for (let i = data.length - 1; i >=0; i--) {
+    for (let i = data.length - 1; i >= 0; i--) {
       descendArr.push(data[i]);
     }
     listTasks(descendArr);
   } else if (mode === "search") {
     sortDate(searchResult);
-    for (let i = searchResult.length - 1; i >=0; i--) {
+    for (let i = searchResult.length - 1; i >= 0; i--) {
       descendArr.push(searchResult[i]);
     }
     listTasks(descendArr);
@@ -154,10 +172,10 @@ function sortDescendingDate() {
 function sortDate(array) {
   for (let i = 0; i < array.length - 1; i++) {
     for (let j = i; j < array.length - 1; j++) {
-      if (array[j].endTime > array[j+1].endTime) {
+      if (array[j].endTime > array[j + 1].endTime) {
         let temp = array[j];
-        array[j] = array[j+1];
-        array[j+1] = temp;
+        array[j] = array[j + 1];
+        array[j + 1] = temp;
       }
     }
   }

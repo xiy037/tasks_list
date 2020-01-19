@@ -9,6 +9,7 @@ function loadAll() {
     listTasks(data);
     countNumber(data);
   }).catch((error) => console.log(error));
+  addKeyboardEventHandler();
 }
 
 function listTasks(array) {
@@ -108,44 +109,64 @@ function searchTask() {
   document.getElementById("input").value = "";
 }
 
+//加keyboard event handler
+function addKeyboardEventHandler() {
+  document.getElementById("input").onkeydown = () => {
+    if (event.key === "Enter") {
+      searchHTML();
+    }
+    if (event.key === "Backspace") {
+      clearInput();
+    }
+  }
+}
+
+
 function searchHTML() {
   let input = document.getElementById("input").value;
   let regInput = new RegExp(input, "ig");
   let myNodeList = document.querySelectorAll("div");
-  let resultNodes = [];
-  for (let i = 0; i < myNodeList.length; i++) {
-    let divNode = myNodeList[i]
+  myNodeList.forEach((divNode) => {
     if (divNode.children.length === 0) {
       if (divNode.innerHTML.match(regInput)) {
         divNode.innerHTML = highlightValue(divNode.innerHTML, input);
-        resultNodes.push(divNode);
       }
     }
-  }
+  });
+  let resultNodes = [];
+  document.querySelectorAll(".highlight").forEach((element) => {
+    resultNodes.push(element);
+  });
   let tempNodeList = [];
   document.getElementById("down").onclick = () => {
-   scrollDown(tempNodeList, resultNodes);
+   scrollToNext(tempNodeList, resultNodes, "down");
   }
   document.getElementById("up").onclick = () => {
-    scrollUp(tempNodeList, resultNodes);
+    scrollToNext(tempNodeList, resultNodes, "up");
   }
   document.getElementById("search-arrow").style.display = "flex";
 }
 
-function scrollDown(tempNodeList, resultNodes) {
-  let input = document.getElementById("input").value;
-  let node = resultNodes.shift();
-  node.innerHTML = highlightValue2(node.innerHTML, input);
-  tempNodeList.push(node);
-  node.scrollIntoView();
-}
-
-function scrollUp(tempNodeList, resultNodes) {
-  let input = document.getElementById("input").value;
-  let node = tempNodeList.pop();
-  node.innerHTML = highlightValue(node.innerHTML, input);
-  resultNodes.unshift(node);
-  node.scrollIntoView();
+function scrollToNext(tempNodeList, resultNodes, flag) {
+  let node;
+  let resultLen = resultNodes.length;
+  let tempLen = tempNodeList.length;
+  if (flag === "down" && resultLen !== 0) {
+    node = resultNodes.shift();
+    node.className = "highlight2";
+    if (tempLen !== 0) {
+      tempNodeList[tempLen - 1].className = "highlight";
+    }
+    tempNodeList.push(node);
+    node.scrollIntoView();
+  }
+  if (flag === "up" && ![0, 1].includes(tempLen)) {
+    node = tempNodeList.pop();
+    node.className = "highlight";
+    resultNodes.unshift(node);
+    tempNodeList[tempLen - 2].className = "highlight2";
+    node.scrollIntoView();
+  }
 }
 
 function clearInput() {
@@ -172,11 +193,6 @@ function highlightValue(item, subStr) {
   return item.replace(regSubStr, newStr);
 }
 
-function highlightValue2(item, subStr) {
-  let regSubStr = new RegExp(subStr, "ig");
-  let newStr = `<span class="highlight2">${item.match(regSubStr)[0]}</span>`;
-  return item.replace(regSubStr, newStr);
-}
 
 
 function sortAscendingDate() {

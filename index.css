@@ -38,6 +38,9 @@ body {
   height: 15px;
   padding: 3px;
 }
+#search-counter {
+  color: blue;
+}
 .down-search-icon {
   transform: rotate(180deg);
 }

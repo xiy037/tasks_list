@@ -136,6 +136,7 @@ function searchHTML() {
   document.querySelectorAll(".highlight").forEach((element) => {
     resultNodes.push(element);
   });
+  document.getElementById("search-counter").innerHTML = resultNodes.length;
   let tempNodeList = [];
   document.getElementById("down").onclick = () => {
     scrollToNext(tempNodeList, resultNodes, "down");

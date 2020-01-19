@@ -121,7 +121,6 @@ function addKeyboardEventHandler() {
   }
 }
 
-
 function searchHTML() {
   let input = document.getElementById("input").value;
   let regInput = new RegExp(input, "ig");
@@ -139,7 +138,7 @@ function searchHTML() {
   });
   let tempNodeList = [];
   document.getElementById("down").onclick = () => {
-   scrollToNext(tempNodeList, resultNodes, "down");
+    scrollToNext(tempNodeList, resultNodes, "down");
   }
   document.getElementById("up").onclick = () => {
     scrollToNext(tempNodeList, resultNodes, "up");
@@ -148,23 +147,20 @@ function searchHTML() {
 }
 
 function scrollToNext(tempNodeList, resultNodes, flag) {
-  let node;
-  let resultLen = resultNodes.length;
-  let tempLen = tempNodeList.length;
-  if (flag === "down" && resultLen !== 0) {
+  if (flag === "down" && resultNodes.length !== 0) {
     node = resultNodes.shift();
     node.className = "highlight2";
-    if (tempLen !== 0) {
-      tempNodeList[tempLen - 1].className = "highlight";
+    if (tempNodeList.length !== 0) {
+      tempNodeList[tempNodeList.length - 1].className = "highlight"; //上一个node变为原来的颜色
     }
     tempNodeList.push(node);
     node.scrollIntoView();
   }
-  if (flag === "up" && ![0, 1].includes(tempLen)) {
+  if (flag === "up" && ![0, 1].includes(tempNodeList.length)) {
     node = tempNodeList.pop();
-    node.className = "highlight";
+    node.className = "highlight"; //这个node变为原色，位置上的上一个变为新的颜色。
     resultNodes.unshift(node);
-    tempNodeList[tempLen - 2].className = "highlight2";
+    tempNodeList[tempNodeList.length - 1].className = "highlight2";
     node.scrollIntoView();
   }
 }

@@ -221,7 +221,7 @@ function sortDescendingDate() {
 
 function sortDate(array) {
   for (let i = 0; i < array.length - 1; i++) {
-    for (let j = i; j < array.length - 1; j++) {
+    for (let j = 0; j < array.length - 1 - i; j++) {
       if (array[j].endTime > array[j + 1].endTime) {
         let temp = array[j];
         array[j] = array[j + 1];

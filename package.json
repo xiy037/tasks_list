@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/xiy037/tasks_list#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "json-server": "^0.15.1"
   }
 }
